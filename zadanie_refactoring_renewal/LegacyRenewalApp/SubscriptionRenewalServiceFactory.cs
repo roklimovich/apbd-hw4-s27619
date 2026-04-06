@@ -4,7 +4,9 @@ using LegacyRenewalApp.Discounts;
 using LegacyRenewalApp.Fees;
 using LegacyRenewalApp.Infrastructure;
 using LegacyRenewalApp.Invoicing;
+using LegacyRenewalApp.Notifications;
 using LegacyRenewalApp.Tax;
+using LegacyRenewalApp.Validation;
  
 namespace LegacyRenewalApp
 {

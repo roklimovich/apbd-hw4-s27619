@@ -1,7 +1,7 @@
 namespace LegacyRenewalApp.Interfaces
 {
-    public interface ISubsriptionPlanRepository
+    public interface ISubscriptionPlanRepository
     {
-        SubsriptionPlan GetByCode(string planCode);
+        SubscriptionPlan GetByCode(string planCode);
     }
 }

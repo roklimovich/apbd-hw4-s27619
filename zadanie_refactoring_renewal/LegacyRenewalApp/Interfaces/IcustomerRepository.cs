@@ -1,4 +1,4 @@
-namespace LegaceRenewalApp.Interfaces
+namespace LegacyRenewalApp.Interfaces
 {
     public interface ICustomerRepository
     {

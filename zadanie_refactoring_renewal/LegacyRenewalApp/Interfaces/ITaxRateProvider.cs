@@ -1,6 +1,6 @@
 namespace LegacyRenewalApp.Interfaces
 {
-    public interface ITaxFeeProvider
+    public interface ITaxRateProvider
     {
         decimal GetTaxRate(string country);
     }

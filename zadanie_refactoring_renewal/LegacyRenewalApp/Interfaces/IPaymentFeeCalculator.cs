@@ -5,8 +5,8 @@ namespace LegacyRenewalApp.Interfaces
         bool Supports(string normilizedPaymentMethod);
         
         // <summary>
-        // Returns the fee amount and apends the note.
+        // Returns the fee amount and appends the note.
         // </summary>
-        decimal CalculateFee(decimal subtotal, ref string notes);
+        decimal Calculate(decimal subtotal, ref string notes);
     }
 }

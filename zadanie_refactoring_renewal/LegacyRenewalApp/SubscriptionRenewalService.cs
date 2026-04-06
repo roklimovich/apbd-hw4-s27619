@@ -1,7 +1,11 @@
 using LegacyRenewalApp.Interfaces;
 using LegacyRenewalApp.Discounts;  
 using LegacyRenewalApp.Fees;
+using LegacyRenewalApp.Infrastructure;
 using LegacyRenewalApp.Invoicing;
+using LegacyRenewalApp.Notifications;
+using LegacyRenewalApp.Tax;
+using LegacyRenewalApp.Validation;
  
 namespace LegacyRenewalApp
 {
@@ -17,6 +21,33 @@ namespace LegacyRenewalApp
         private readonly RenewalInvoiceFactory _invoiceFactory;
         private readonly RenewalNotificationService _notificationService;
         private readonly IBillingGateway _billingGateway;
+ 
+        public SubscriptionRenewalService()
+            : this(
+                new CustomerRepositoryAdapter(),
+                new SubscriptionPlanRepositoryAdapter(),
+                new RenewalRequestValidator(),
+                new DiscountCalculator(new IDiscountRule[]
+                {
+                    new SegmentDiscountRule(),
+                    new LoyaltyYearsDiscountRule(),
+                    new TeamSizeDiscountRule(),
+                    new LoyaltyPointsDiscountRule(useLoyaltyPoints: false),
+                }),
+                new PlanBasedSupportFeeProvider(),
+                new PaymentFeeResolver(new IPaymentFeeCalculator[]
+                {
+                    new CardPaymentFeeCalculator(),
+                    new BankTransferFeeCalculator(),
+                    new PayPalFeeCalculator(),
+                    new InvoicePaymentFeeCalculator(),
+                }),
+                new CountryTaxRateProvider(),
+                new RenewalInvoiceFactory(),
+                new RenewalNotificationService(new LegacyBillingGatewayAdapter()),
+                new LegacyBillingGatewayAdapter())
+        {
+        }
  
         public SubscriptionRenewalService(
             ICustomerRepository customerRepository,
